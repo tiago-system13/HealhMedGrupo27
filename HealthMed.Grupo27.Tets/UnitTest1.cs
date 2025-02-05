@@ -1,4 +1,4 @@
-namespace HealthMed.Grupo27.Tests
+namespace HealthMed.Grupo27.Tets
 {
     public class UnitTest1
     {
