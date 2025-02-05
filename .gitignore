@@ -1,0 +1,11 @@
+﻿################################################################################
+# Este arquivo .gitignore foi criado automaticamente pelo Microsoft(R) Visual Studio.
+################################################################################
+
+/HealthMed.Grupo27/HealthMed.Grupo27.Tests/obj
+/src/HealthMed.Grupo27.API/obj
+/src/HealthMed.Grupo27.Application/obj
+/src/HealthMed.Grupo27.Domain/obj
+/src/HealthMed.Grupo27.Infrastructure/obj
+/HealthMed.Grupo27/.vs/HealthMed.Grupo27
+/.vs
