@@ -9,12 +9,12 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using Telemedicina.Domain.Entities;
-using Telemedicina.Infrastructure;
-using Telemedicina.Application.Services;
-using Telemedicina.Application.Interfaces;
-using Telemedicina.Infrastructure.Repositories;
-using Telemedicina.API.Controllers;
+using HealthMed.Grupo27.Domain.Entities;
+using HealthMed.Grupo27.Infrastructure;
+using HealthMed.Grupo27.Application.Services;
+using HealthMed.Grupo27.Application.Interfaces;
+using HealthMed.Grupo27.Infrastructure.Repositories;
+using HealthMed.Grupo27.API.Controllers;
 
 // Arquivo: Telemedicina.API/Program.cs
 var builder = WebApplication.CreateBuilder(args);

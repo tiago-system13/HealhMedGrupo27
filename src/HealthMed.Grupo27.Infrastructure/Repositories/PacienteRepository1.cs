@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HealthMed.Grupo27.Application.Interfaces;
+using HealthMed.Grupo27.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace HealthMed.Grupo27.Infrastructure.Repositories
 {
