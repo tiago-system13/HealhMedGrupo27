@@ -11,7 +11,9 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.11" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.1" />
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.3.1" />
+    <PackageReference Include="Paket.Core" Version="9.0.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.3.1" />
   </ItemGroup>
@@ -20,10 +22,6 @@
     <ProjectReference Include="..\HealthMed.Grupo27.Application\HealthMed.Grupo27.Application.csproj" />
     <ProjectReference Include="..\HealthMed.Grupo27.Domain\HealthMed.Grupo27.Domain.csproj" />
     <ProjectReference Include="..\HealthMed.Grupo27.Infrastructure\HealthMed.Grupo27.Infrastructure.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>
