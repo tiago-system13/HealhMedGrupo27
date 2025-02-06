@@ -9,5 +9,15 @@ namespace HealthMed.Grupo27.Domain.Entities
     public class Consulta
     {
         public int IdConsulta { get; set; }
+
+        public int IdPaciente { get; set; }
+
+        public int IdMedico { get; set; }
+
+        public DateTime DiaConsulta { get; set; }
+
+        public DateTime HoraInicio { get; set; }
+
+        public DateTime HoraFim { get; set; }
     }
 }
