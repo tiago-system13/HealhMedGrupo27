@@ -15,7 +15,6 @@ using HealthMed.Grupo27.Infrastructure;
 using HealthMed.Grupo27.Application.Interfaces;
 using HealthMed.Grupo27.Infrastructure.Repositories;
 using HealthMed.Grupo27.API.Controllers;
-using Paket;
 using Microsoft.OpenApi.Models;
 
 // Arquivo: Telemedicina.API/Program.cs

@@ -1,0 +1,3 @@
+--COMANDO PARA INICIAR
+docker build -t mssql-server .
+docker run -d --name mssql-container -p 1433:1433 -e "SA_PASSWORD=Grp27h4ck4t0n" -t mssql-server
