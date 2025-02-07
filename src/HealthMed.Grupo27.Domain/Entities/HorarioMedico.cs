@@ -12,7 +12,11 @@ namespace HealthMed.Grupo27.Domain.Entities
 
         public int IdMedico { get; set; }
 
-        public DateTime DiaAtendimento { get; set; }
+        public int IdHorario { get; set; }
+
+        public int Status { get; set; }
+
+        public DateTime DiaSemana { get; set; }
 
         public DateTime HoraInicio { get; set; }
 

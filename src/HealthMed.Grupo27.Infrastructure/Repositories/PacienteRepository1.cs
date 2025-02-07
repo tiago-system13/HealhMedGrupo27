@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using HealthMed.Grupo27.Application.Interfaces;
 using HealthMed.Grupo27.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using HealthMed.Grupo27.Infrastructure.Data;
 
 namespace HealthMed.Grupo27.Infrastructure.Repositories
 {

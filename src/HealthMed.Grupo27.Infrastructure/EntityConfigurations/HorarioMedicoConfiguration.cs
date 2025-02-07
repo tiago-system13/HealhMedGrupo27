@@ -13,7 +13,7 @@ namespace HealthMed.Grupo27.Infrastructure.EntityConfigurations
             builder.Property(h => h.HoraInicio).IsRequired();
             builder.Property(h => h.HoraFim).IsRequired();
             builder.Property(h => h.Status).IsRequired();
-            builder.HasOne(h => h.Medico).WithMany().HasForeignKey(h => h.IdMedico);
+            builder.HasOne(h => h.IdMedico).WithMany().HasForeignKey(h => h.IdMedico);
         }
     }
 }

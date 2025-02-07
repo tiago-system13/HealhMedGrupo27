@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HealthMed.Grupo27.Application.Interfaces;
+using HealthMed.Grupo27.Infrastructure.Data;
 using HealthMed.Grupo27.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -35,6 +36,31 @@ namespace HealthMed.Grupo27.Infrastructure.Repositories
         {
             _context.Consultas.Update(consulta);
             await _context.SaveChangesAsync();
+        }
+
+        public Task<IEnumerable<Consulta>> GetConsultasAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Consulta> GetByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task AddAsync(Consulta consulta)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Consulta> ObterPorIdAsync(int idConsulta)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<Consulta> IConsultaRepository.GetConsultasAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 
