@@ -14,7 +14,7 @@ namespace HealthMed.Grupo27.Application.Interfaces
 
         Task AdicionarAsync(HorarioMedico horario);
 
-        Task<HorarioMedico> GetHorariosPorMedicoAsync(int IdMedico);
+        Task<List<HorarioMedico>> GetHorariosPorMedicoAsync(int IdMedico);
     }
 
 

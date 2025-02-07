@@ -21,5 +21,7 @@ namespace HealthMed.Grupo27.Domain.Entities
         public DateTime HoraInicio { get; set; }
 
         public DateTime HoraFim { get; set; }
+
+        public Medico Medico { get; set; }
     }
 }

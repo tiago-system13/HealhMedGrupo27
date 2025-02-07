@@ -22,5 +22,9 @@ namespace HealthMed.Grupo27.Domain.Entities
         public DateTime HoraFim { get; set; }
 
         public StatusConsultaType StatusConsulta { get; set; }
+
+        public Medico Medico { get; set; }
+
+        public Paciente Paciente { get; set; }
     }
 }

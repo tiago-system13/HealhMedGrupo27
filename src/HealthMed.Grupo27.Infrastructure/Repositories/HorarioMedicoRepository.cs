@@ -35,7 +35,7 @@ namespace HealthMed.Grupo27.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<HorarioMedico> GetHorariosPorMedicoAsync(int IdMedico)
+        public Task<List<HorarioMedico>> GetHorariosPorMedicoAsync(int IdMedico)
         {
             throw new NotImplementedException();
         }

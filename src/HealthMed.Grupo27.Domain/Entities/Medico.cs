@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace HealthMed.Grupo27.Domain.Entities
 {
-    public class Medico : Usuario
+    public class Medico
     {
         public int IdMedico { get; set; }
-
-        public int IdUsuario { get; set; }
 
         public string Nome { get; set; }
 
@@ -25,5 +23,7 @@ namespace HealthMed.Grupo27.Domain.Entities
         public int ValorConsulta { get; set; }
 
         public string Especialidade { get; set; }
+
+        public List<Usuario> Usuarios { get; set; }
     }
 }

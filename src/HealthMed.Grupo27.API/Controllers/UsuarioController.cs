@@ -1,4 +1,5 @@
 ﻿using HealthMed.Grupo27.Application.Interfaces;
+using HealthMed.Grupo27.Application.Utils;
 using HealthMed.Grupo27.Domain.DTOs;
 using HealthMed.Grupo27.Domain.Entities;
 using Microsoft.AspNetCore.Identity.Data;
@@ -39,7 +40,7 @@ namespace HealthMed.Grupo27.API.Controllers
         }
 
         [HttpPost("login-paciente")]
-        public async Task<IActionResult> LoginPaciente([FromBody] LoginRequest request)
+        public async Task<IActionResult> LoginPaciente([FromBody] LoginPacienteRequest request)
         {
             var senhaCriptografada = Utilidades.CriptografarSenha(request.Senha);
             var usuario = await _usuarioRepository.ObterPorLoginSenhaAsync(request.Login, senhaCriptografada);

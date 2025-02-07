@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HealthMed.Grupo27.Domain.Entities
 {
-    public class Paciente : Usuario
+    public class Paciente
     {
         public int IdPaciente { get; set; }
 
@@ -19,5 +19,7 @@ namespace HealthMed.Grupo27.Domain.Entities
         public string Email { get; set; }
 
         public string CPF { get; set; }
+
+        public List<Usuario> Usuarios { get; set; }
     }
 }

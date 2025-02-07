@@ -11,9 +11,8 @@ namespace HealthMed.Grupo27.Infrastructure.EntityConfigurations
             builder.HasKey(c => c.IdConsulta);
             builder.Property(c => c.HoraInicio).IsRequired();
             builder.Property(c => c.HoraFim).IsRequired();
-            builder.HasOne(c => c.StatusConsulta).WithMany().HasForeignKey(c => c.IdStatusConsulta);
-            builder.HasOne(c => c.IdMedico).WithMany().HasForeignKey(c => c.IdMedico);
-            builder.HasOne(c => c.IdPaciente).WithMany().HasForeignKey(c => c.IdPaciente);
+            builder.HasOne(c => c.Medico).WithMany().HasForeignKey(c => c.IdMedico);
+            builder.HasOne(c => c.Paciente).WithMany().HasForeignKey(c => c.IdPaciente);
         }
     }
 }

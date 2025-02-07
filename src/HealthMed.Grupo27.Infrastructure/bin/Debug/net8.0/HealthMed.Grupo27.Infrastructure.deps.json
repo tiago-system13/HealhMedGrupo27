@@ -9,6 +9,7 @@
       "HealthMed.Grupo27.Infrastructure/1.0.0": {
         "dependencies": {
           "HealthMed.Grupo27.Application": "1.0.0",
+          "HealthMed.Grupo27.Domain": "1.0.0",
           "Microsoft.EntityFrameworkCore": "9.0.1",
           "Microsoft.EntityFrameworkCore.SqlServer": "9.0.1",
           "Microsoft.IdentityModel.Tokens": "8.3.1"
