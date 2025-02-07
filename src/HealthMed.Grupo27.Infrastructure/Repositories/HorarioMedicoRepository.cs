@@ -12,8 +12,31 @@ namespace HealthMed.Grupo27.Infrastructure.Repositories
     public class HorarioMedicoRepository : IHorarioMedicoRepository
     {
         private readonly AppDbContext _context;
-        public HorarioMedicoRepository(AppDbContext context) => _context = context;
-        public async Task<IEnumerable<HorarioMedico>> GetHorariosAsync() => await _context.HorariosMedicos.ToListAsync();
-        public async Task AddAsync(HorarioMedico horario) { _context.HorariosMedicos.Add(horario); await _context.SaveChangesAsync(); }
+
+        public HorarioMedicoRepository(AppDbContext context)
+        {
+            _context = context;
+        }
+
+        public Task AddAsync(HorarioMedico horario)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task AdicionarAsync(HorarioMedico horario)
+        {
+            await _context.HorariosMedicos.AddAsync(horario);
+            await _context.SaveChangesAsync();
+        }
+
+        public Task<IEnumerable<HorarioMedico>> GetHorariosAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<HorarioMedico> GetHorariosPorMedicoAsync(int IdMedico)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

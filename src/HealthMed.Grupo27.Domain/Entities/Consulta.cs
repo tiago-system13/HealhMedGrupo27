@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HealthMed.Grupo27.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,5 +20,7 @@ namespace HealthMed.Grupo27.Domain.Entities
         public DateTime HoraInicio { get; set; }
 
         public DateTime HoraFim { get; set; }
+
+        public StatusConsultaType StatusConsulta { get; set; }
     }
 }

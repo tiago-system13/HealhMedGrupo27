@@ -11,6 +11,10 @@ namespace HealthMed.Grupo27.Application.Interfaces
     {
         Task<IEnumerable<HorarioMedico>> GetHorariosAsync();
         Task AddAsync(HorarioMedico horario);
+
+        Task AdicionarAsync(HorarioMedico horario);
+
+        Task<HorarioMedico> GetHorariosPorMedicoAsync(int IdMedico);
     }
 
 

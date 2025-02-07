@@ -1,9 +1,8 @@
 ﻿using HealthMed.Grupo27.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Telemedicina.Domain.Entities;
 
-namespace Telemedicina.Infrastructure.EntityConfigurations
+namespace HealthMed.Grupo27.Infrastructure.EntityConfigurations
 {
     public class ConsultaConfiguration : IEntityTypeConfiguration<Consulta>
     {
