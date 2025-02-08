@@ -4,6 +4,7 @@ using HealthMed.Grupo27.Domain.Entities;
 using HealthMed.Grupo27.Domain.Enums;
 using HealthMed.Grupo27.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace HealthMed.Grupo27.API.Controllers
 {
@@ -15,13 +16,15 @@ namespace HealthMed.Grupo27.API.Controllers
         private readonly IHorarioMedicoRepository _horarioRepository;
         private readonly IMedicoRepository _medicoRepository;
         private readonly IPacienteRepository _pacienteRepository;
+        private readonly ILogger<ConsultaController> _logger;
 
-        public ConsultaController(IConsultaRepository consultaRepository, IHorarioMedicoRepository horarioRepository, IMedicoRepository medicoRepository, IPacienteRepository pacienteRepository)
+        public ConsultaController(IConsultaRepository consultaRepository, IHorarioMedicoRepository horarioRepository, IMedicoRepository medicoRepository, IPacienteRepository pacienteRepository, ILogger<ConsultaController> logger)
         {
             _consultaRepository = consultaRepository;
             _horarioRepository = horarioRepository;
             _medicoRepository = medicoRepository;
             _pacienteRepository = pacienteRepository;
+            _logger = logger;
         }
 
         /// <summary>
@@ -41,6 +44,7 @@ namespace HealthMed.Grupo27.API.Controllers
         {
             try
             {
+                _logger.LogInformation("Iniciando o cadastro da consulta.");
                 var horariosDisponiveis = await _horarioRepository.GetHorariosPorMedicoAsync(consultaDTO.IdMedico);
 
                 if (horariosDisponiveis == null)
@@ -77,6 +81,7 @@ namespace HealthMed.Grupo27.API.Controllers
             }
             catch (Exception Ex)
             {
+                _logger.LogError(Ex, "Erro ao cadastrar a consulta.");
                 return BadRequest($"Error: {Ex.Message}");
             }
         }
@@ -92,6 +97,8 @@ namespace HealthMed.Grupo27.API.Controllers
         {
             try
             {
+                _logger.LogInformation($"Iniciando a confirmação da consulta ID: {idConsulta}");
+
                 var consulta = await _consultaRepository.ObterPorIdAsync(idConsulta);
                 if (consulta == null)
                 {
@@ -110,6 +117,7 @@ namespace HealthMed.Grupo27.API.Controllers
             }
             catch (Exception Ex)
             {
+                _logger.LogError(Ex, $"Erro ao confirmar a consulta ID: {idConsulta}"); 
                 return BadRequest($"Error: {Ex.Message}");
             }   
         }

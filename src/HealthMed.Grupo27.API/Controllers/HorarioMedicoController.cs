@@ -10,11 +10,13 @@ namespace HealthMed.Grupo27.API.Controllers
     {
         private readonly IHorarioMedicoRepository _horarioRepository;
         private readonly IMedicoRepository _medicoRepository;
+        private readonly ILogger<ConsultaController> _logger;
 
-        public HorarioMedicoController(IHorarioMedicoRepository horarioRepository, IMedicoRepository medicoRepository)
+        public HorarioMedicoController(IHorarioMedicoRepository horarioRepository, IMedicoRepository medicoRepository, ILogger<ConsultaController> logger)
         {
             _horarioRepository = horarioRepository;
             _medicoRepository = medicoRepository;
+            _logger = logger;
         }
 
         /// <summary>
@@ -27,6 +29,7 @@ namespace HealthMed.Grupo27.API.Controllers
         {
             try
             {
+                _logger.LogInformation($"Iniciando o cadastro de Horario Medico, IdMedico: {horarioMedico.IdMedico}.");
                 var medicoExiste = await _medicoRepository.GetByIdAsync(horarioMedico.IdMedico);
                 if (medicoExiste == null)
                 {
@@ -38,6 +41,7 @@ namespace HealthMed.Grupo27.API.Controllers
             }
             catch (Exception Ex)
             {
+                _logger.LogError(Ex, $"Erro no cadastro de Horario Medico, IdMedico: {horarioMedico.IdMedico}.");
                 return BadRequest($"Error: {Ex.Message}");
             }   
         }
@@ -47,7 +51,20 @@ namespace HealthMed.Grupo27.API.Controllers
         /// </summary>
         /// <returns>Retorna uma lista de horários médicos.</returns>
         [HttpGet]
-        public async Task<IActionResult> GetHorarios() => Ok(await _horarioRepository.GetHorariosAsync());
+        public async Task<IActionResult> GetHorarios() 
+        {
+            try
+            {
+                _logger.LogInformation("Iniciando a busca de horários.");
+                return Ok(await _horarioRepository.GetHorariosAsync());
+            }
+            catch (Exception Ex)
+            {
+                _logger.LogError(Ex, "Erro na busca de horários.");
+                return BadRequest($"Error: {Ex.Message}");
+            }
+        }
+            
     }
 
 }

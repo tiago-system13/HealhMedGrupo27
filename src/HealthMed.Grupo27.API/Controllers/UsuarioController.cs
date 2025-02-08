@@ -17,11 +17,13 @@ namespace HealthMed.Grupo27.API.Controllers
     {
         private readonly IUsuarioRepository _usuarioRepository;
         private readonly IConfiguration _configuration;
+        private readonly ILogger<ConsultaController> _logger;
 
-        public UsuarioController(IUsuarioRepository usuarioRepository, IConfiguration configuration)
+        public UsuarioController(IUsuarioRepository usuarioRepository, IConfiguration configuration, ILogger<ConsultaController> logger)
         {
             _usuarioRepository = usuarioRepository;
             _configuration = configuration;
+            _logger = logger;
         }
 
         /// <summary>
@@ -34,6 +36,7 @@ namespace HealthMed.Grupo27.API.Controllers
         {
             try
             {
+                _logger.LogInformation($"Iniciando o login do medico CRM: {request.CRM}.");
                 var senhaCriptografada = HashSenha(request.Senha);
                 var usuario = await _usuarioRepository.ObterPorCrmESenhaAsync(request.CRM, senhaCriptografada);
 
@@ -47,6 +50,7 @@ namespace HealthMed.Grupo27.API.Controllers
             }
             catch (Exception Ex)
             {
+                _logger.LogError(Ex, $"Erro no login do medico CRM: {request.CRM}");
                 return BadRequest($"Error: {Ex.Message}");
             }       
         }
@@ -60,6 +64,7 @@ namespace HealthMed.Grupo27.API.Controllers
         {
             try
             {
+                _logger.LogInformation($"Iniciando o login do paciente Login: {request.Login}.");
                 var senhaCriptografada = Utilidades.CriptografarSenha(request.Senha);
                 var usuario = await _usuarioRepository.ObterPorLoginSenhaAsync(request.Login, senhaCriptografada);
 
@@ -73,6 +78,7 @@ namespace HealthMed.Grupo27.API.Controllers
             }
             catch (Exception Ex)
             {
+                _logger.LogError(Ex, $"Erro no login do paciente Login: {request.Login}");
                 return BadRequest($"Error: {Ex.Message}");
             }          
         }
