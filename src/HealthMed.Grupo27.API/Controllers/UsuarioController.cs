@@ -1,8 +1,7 @@
-﻿using HealthMed.Grupo27.Application.Interfaces;
-using HealthMed.Grupo27.Application.Utils;
+﻿using HealthMed.Grupo27.Application.Utils;
 using HealthMed.Grupo27.Domain.DTOs;
 using HealthMed.Grupo27.Domain.Entities;
-using Microsoft.AspNetCore.Identity.Data;
+using HealthMed.Grupo27.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;

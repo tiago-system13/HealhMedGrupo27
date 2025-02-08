@@ -1,8 +1,7 @@
-﻿using System;
-using HealthMed.Grupo27.Application.Interfaces;
-using HealthMed.Grupo27.Domain.Entities;
+﻿using HealthMed.Grupo27.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using HealthMed.Grupo27.Infrastructure.Data;
+using HealthMed.Grupo27.Domain.Interfaces;
 
 namespace HealthMed.Grupo27.Infrastructure.Repositories
 {

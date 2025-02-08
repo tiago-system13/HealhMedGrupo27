@@ -1,4 +1,4 @@
-﻿using HealthMed.Grupo27.Application.Interfaces;
+﻿using HealthMed.Grupo27.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HealthMed.Grupo27.API.Controllers

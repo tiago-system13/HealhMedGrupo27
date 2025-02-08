@@ -1,7 +1,6 @@
-﻿using HealthMed.Grupo27.Application.Interfaces;
-using HealthMed.Grupo27.Domain.Entities;
+﻿using HealthMed.Grupo27.Domain.Entities;
 using HealthMed.Grupo27.Domain.Enums;
-using HealthMed.Grupo27.Infrastructure.Repositories;
+using HealthMed.Grupo27.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HealthMed.Grupo27.API.Controllers
