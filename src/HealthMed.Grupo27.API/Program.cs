@@ -19,8 +19,18 @@ using Microsoft.OpenApi.Models;
 // Arquivo: Telemedicina.API/Program.cs
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer("your_connection_string"));
+var configuration = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json")
+                    .Build();
+
+var usr = Environment.GetEnvironmentVariable("USR_BD");
+var pwd = Environment.GetEnvironmentVariable("PWD_BD");
+
+var connectionString = configuration.GetConnectionString("DefaultConnection");
+connectionString = string.Format(connectionString, usr, pwd);
+
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
 
 //builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IMedicoRepository, MedicoRepository>();

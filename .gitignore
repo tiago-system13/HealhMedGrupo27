@@ -13,3 +13,7 @@
 /HealthMed.Grupo27/.vs/ProjectEvaluation/healthmed.grupo27.metadata.v9.bin
 /HealthMed.Grupo27/.vs/ProjectEvaluation/healthmed.grupo27.projects.v9.bin
 /HealthMed.Grupo27/.vs/ProjectEvaluation/healthmed.grupo27.strings.v9.bin
+/src/HealthMed.Grupo27.Infrastructure/bin
+/src/HealthMed.Grupo27.API/bin
+/src/HealthMed.Grupo27.Application/bin
+/src/HealthMed.Grupo27.Domain/bin
