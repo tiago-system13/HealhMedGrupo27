@@ -10,27 +10,46 @@ namespace HealthMed.Grupo27.API.Controllers
         private readonly IMedicoRepository _repository;
         public MedicoController(IMedicoRepository repository) => _repository = repository;
 
+        /// <summary>
+        /// Busca médicos cadastrados com base em filtros opcionais.
+        /// </summary>
+        /// <param name="especialidade">Especialidade do médico (opcional).</param>
+        /// <param name="nome">Nome do médico (opcional).</param>
+        /// <param name="crm">CRM do médico (opcional).</param>
+        /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> BuscarMedicos([FromQuery] string? especialidade, [FromQuery] string? nome, [FromQuery] string? crm)
+        public async Task<IActionResult> BuscarMedicos([FromQuery] string? especialidade, [FromQuery] string? nome, [FromQuery] string? crm, [FromQuery] decimal? valorConsulta)
         {
-            var medicos = await _repository.GetMedicosAsync();
-
-            if (!string.IsNullOrEmpty(especialidade))
+            try
             {
-                medicos = medicos.Where(m => m.Especialidade.Contains(especialidade, StringComparison.OrdinalIgnoreCase)).ToList();
-            }
+                var medicos = await _repository.GetMedicosAsync();
 
-            if (!string.IsNullOrEmpty(nome))
+                if (!string.IsNullOrEmpty(especialidade))
+                {
+                    medicos = medicos.Where(m => m.Especialidade.Contains(especialidade, StringComparison.OrdinalIgnoreCase)).ToList();
+                }
+
+                if (!string.IsNullOrEmpty(nome))
+                {
+                    medicos = medicos.Where(m => m.Nome.Contains(nome, StringComparison.OrdinalIgnoreCase)).ToList();
+                }
+
+                if (!string.IsNullOrEmpty(crm))
+                {
+                    medicos = medicos.Where(m => m.CRM.Equals(crm, StringComparison.OrdinalIgnoreCase)).ToList();
+                }
+
+                if (valorConsulta.HasValue)
+                {
+                    medicos = medicos.Where(m => m.ValorConsulta == valorConsulta.Value).ToList();
+                }
+
+                return Ok(medicos);
+            }
+            catch (Exception Ex)
             {
-                medicos = medicos.Where(m => m.Nome.Contains(nome, StringComparison.OrdinalIgnoreCase)).ToList();
+                return BadRequest($"Error: {Ex.Message}");
             }
-
-            if (!string.IsNullOrEmpty(crm))
-            {
-                medicos = medicos.Where(m => m.CRM.Equals(crm, StringComparison.OrdinalIgnoreCase)).ToList();
-            }
-
-            return Ok(medicos);
         }
     }
 }

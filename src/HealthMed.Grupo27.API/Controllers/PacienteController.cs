@@ -10,6 +10,10 @@ namespace HealthMed.Grupo27.API.Controllers
         private readonly IPacienteRepository _repository;
         public PacienteController(IPacienteRepository repository) => _repository = repository;
 
+        /// <summary>
+        /// Obtém a lista de pacientes cadastrados.
+        /// </summary>
+        /// <returns>Retorna uma lista de pacientes.</returns>
         [HttpGet]
         public async Task<IActionResult> GetPacientes() => Ok(await _repository.GetPacientesAsync());
     }
