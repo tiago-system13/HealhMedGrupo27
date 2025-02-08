@@ -17,3 +17,5 @@
 /src/HealthMed.Grupo27.API/bin
 /src/HealthMed.Grupo27.Application/bin
 /src/HealthMed.Grupo27.Domain/bin
+/HealthMed.Grupo27.Tets/bin/Debug/net8.0
+/HealthMed.Grupo27/.vs/ProjectEvaluation
