@@ -1,4 +1,5 @@
 ﻿using HealthMed.Grupo27.Application.Interfaces;
+using HealthMed.Grupo27.Domain.DTOs;
 using HealthMed.Grupo27.Domain.Entities;
 using HealthMed.Grupo27.Domain.Enums;
 using HealthMed.Grupo27.Infrastructure.Repositories;
@@ -27,24 +28,39 @@ namespace HealthMed.Grupo27.API.Controllers
         public async Task<IActionResult> GetConsultas() => Ok(await _consultaRepository.GetConsultasAsync());
 
         [HttpPost("cadastrar")]
-        public async Task<IActionResult> CadastrarConsulta([FromBody] Consulta consulta)
+        public async Task<IActionResult> CadastrarConsulta([FromBody] ConsultaDTO consultaDTO)
         {
-            var horariosDisponiveis = await _horarioRepository.GetHorariosPorMedicoAsync(consulta.IdMedico);
-            var diaSemana = consulta.DiaConsulta;
+            
+            var horariosDisponiveis = await _horarioRepository.GetHorariosPorMedicoAsync(consultaDTO.IdMedico);
 
-            var horarioValido = horariosDisponiveis.Any(h => h.DiaSemana == diaSemana &&
-                                                              consulta.HoraInicio.TimeOfDay >= h.HoraInicio.TimeOfDay &&
-                                                              consulta.HoraFim.TimeOfDay <= h.HoraFim.TimeOfDay);
+            if(horariosDisponiveis == null)
+            {
+                return BadRequest("Não há horários disponíveis para o médico escolhido.");
+            }
+
+            var horarioValido = horariosDisponiveis.Any(h => h.DiaSemana.DayOfWeek == consultaDTO.DiaConsulta.DayOfWeek &&
+                                                              consultaDTO.HoraInicio.TimeOfDay >= h.HoraInicio.TimeOfDay &&
+                                                              consultaDTO.HoraFim.TimeOfDay <= h.HoraFim.TimeOfDay);
             if (!horarioValido)
             {
                 return BadRequest("O médico não tem disponibilidade nesse horário.");
             }
 
-            var existeConflito = await _consultaRepository.ExisteConsultaNoHorario(consulta.IdMedico, consulta.HoraInicio, consulta.HoraFim);
+            var existeConflito = await _consultaRepository.ExisteConsultaNoHorario(consultaDTO.IdMedico, consultaDTO.HoraInicio, consultaDTO.HoraFim);
             if (existeConflito)
             {
                 return BadRequest("Já existe uma consulta agendada para este horário.");
             }
+            
+            Consulta consulta = new Consulta() 
+            { 
+                IdMedico = consultaDTO.IdMedico, 
+                IdPaciente = consultaDTO.IdPaciente, 
+                HoraInicio = consultaDTO.HoraInicio,
+                HoraFim = consultaDTO.HoraFim,
+                DiaConsulta = consultaDTO.DiaConsulta,
+                StatusConsulta = StatusConsultaType.Cadastrada
+            };
 
             await _consultaRepository.AdicionarAsync(consulta);
             return Ok("Consulta cadastrada com sucesso.");

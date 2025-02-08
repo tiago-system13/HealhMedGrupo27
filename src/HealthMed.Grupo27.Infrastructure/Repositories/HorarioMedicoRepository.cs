@@ -35,9 +35,9 @@ namespace HealthMed.Grupo27.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<List<HorarioMedico>> GetHorariosPorMedicoAsync(int IdMedico)
+        public async Task<List<HorarioMedico>> GetHorariosPorMedicoAsync(int IdMedico)
         {
-            throw new NotImplementedException();
+            return await _context.HorariosMedicos.Where(h => h.IdMedico == IdMedico).ToListAsync();
         }
     }
 }
