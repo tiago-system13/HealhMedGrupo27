@@ -123,12 +123,13 @@ namespace HealthMed.Grupo27.Infrastructure.Migrations
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
 
-                    b.Property<int>("Telefone")
+                    b.Property<string>("Telefone")
+                        .IsRequired()
                         .HasMaxLength(11)
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(11)");
 
-                    b.Property<int>("ValorConsulta")
-                        .HasColumnType("int");
+                    b.Property<decimal>("ValorConsulta")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("IdMedico");
 
@@ -153,17 +154,15 @@ namespace HealthMed.Grupo27.Infrastructure.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<int>("IdUsuario")
-                        .HasColumnType("int");
-
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
 
-                    b.Property<int>("Telefone")
+                    b.Property<string>("Telefone")
+                        .IsRequired()
                         .HasMaxLength(11)
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(11)");
 
                     b.HasKey("IdPaciente");
 
@@ -180,8 +179,8 @@ namespace HealthMed.Grupo27.Infrastructure.Migrations
 
                     b.Property<string>("Senha")
                         .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("IdUsuario");
 

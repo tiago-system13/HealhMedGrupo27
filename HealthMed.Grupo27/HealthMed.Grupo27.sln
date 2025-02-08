@@ -21,7 +21,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthMed.Grupo27.Domain", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HealthMed.Grupo27.Tets", "HealthMed.Grupo27.Tets", "{099B7503-8C40-451E-9A29-402E9C9988B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthMed.Grupo27.Tets", "..\HealthMed.Grupo27.Tets\HealthMed.Grupo27.Tets.csproj", "{9CE045A6-F1FF-4514-94D4-2C49D6CDA617}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthMed.Grupo27.Tests", "..\HealthMed.Grupo27.Tets\HealthMed.Grupo27.Tests.csproj", "{9CE045A6-F1FF-4514-94D4-2C49D6CDA617}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

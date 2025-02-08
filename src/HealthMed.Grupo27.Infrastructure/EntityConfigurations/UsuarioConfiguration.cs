@@ -9,7 +9,7 @@ namespace HealthMed.Grupo27.Infrastructure.EntityConfigurations
         public void Configure(EntityTypeBuilder<Usuario> builder)
         {
             builder.HasKey(u => u.IdUsuario);
-            builder.Property(u => u.Senha).HasMaxLength(40).IsRequired();
+            builder.Property(u => u.Senha).HasMaxLength(100).IsRequired();
 
             builder.HasMany(u => u.Medicos)
                    .WithMany(m => m.Usuarios)

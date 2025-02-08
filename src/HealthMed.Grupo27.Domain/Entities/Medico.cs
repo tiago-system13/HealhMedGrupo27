@@ -12,7 +12,7 @@ namespace HealthMed.Grupo27.Domain.Entities
 
         public string Nome { get; set; }
 
-        public int Telefone { get; set; }
+        public string Telefone { get; set; }
 
         public string Email { get; set; }
 
@@ -20,7 +20,7 @@ namespace HealthMed.Grupo27.Domain.Entities
 
         public string CRM { get; set; }
 
-        public int ValorConsulta { get; set; }
+        public decimal ValorConsulta { get; set; }
 
         public string Especialidade { get; set; }
 
