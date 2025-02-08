@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HealthMed.Grupo27.Domain.Entities
+namespace HealthMed.Grupo27.Domain.DTOs
 {
-    public class HorarioMedico
+    public class HorarioMedicoDTO
     {
-        public int IdHorario { get; set; }
-
         public int IdMedico { get; set; }
+
+        public int IdHorario { get; set; }
 
         public int Status { get; set; }
 
@@ -19,7 +19,5 @@ namespace HealthMed.Grupo27.Domain.Entities
         public DateTime HoraInicio { get; set; }
 
         public DateTime HoraFim { get; set; }
-
-        public Medico Medico { get; set; }
     }
 }

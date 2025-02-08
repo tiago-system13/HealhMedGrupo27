@@ -74,9 +74,6 @@ namespace HealthMed.Grupo27.Infrastructure.Migrations
                     b.Property<DateTime>("HoraInicio")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("IdHorarioMedico")
-                        .HasColumnType("int");
-
                     b.Property<int>("IdMedico")
                         .HasColumnType("int");
 

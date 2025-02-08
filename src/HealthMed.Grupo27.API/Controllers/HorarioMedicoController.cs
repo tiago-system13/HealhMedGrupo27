@@ -10,28 +10,61 @@ namespace HealthMed.Grupo27.API.Controllers
     {
         private readonly IHorarioMedicoRepository _horarioRepository;
         private readonly IMedicoRepository _medicoRepository;
+        private readonly ILogger<ConsultaController> _logger;
 
-        public HorarioMedicoController(IHorarioMedicoRepository horarioRepository, IMedicoRepository medicoRepository)
+        public HorarioMedicoController(IHorarioMedicoRepository horarioRepository, IMedicoRepository medicoRepository, ILogger<ConsultaController> logger)
         {
             _horarioRepository = horarioRepository;
             _medicoRepository = medicoRepository;
+            _logger = logger;
         }
 
+        /// <summary>
+        /// Cadastra um novo horário para um médico.
+        /// </summary>
+        /// <param name="horarioMedico">Objeto contendo as informações do horário a ser cadastrado.</param>
+        /// <returns></returns>
         [HttpPost("cadastrar")]
         public async Task<IActionResult> CadastroHorarioMedico([FromBody] HorarioMedico horarioMedico)
         {
-            var medicoExiste = await _medicoRepository.GetByIdAsync(horarioMedico.IdMedico);
-            if (medicoExiste == null)
+            try
             {
-                return BadRequest("Médico não encontrado.");
-            }
+                _logger.LogInformation($"Iniciando o cadastro de Horario Medico, IdMedico: {horarioMedico.IdMedico}.");
+                var medicoExiste = await _medicoRepository.GetByIdAsync(horarioMedico.IdMedico);
+                if (medicoExiste == null)
+                {
+                    return BadRequest("Médico não encontrado.");
+                }
 
-            await _horarioRepository.AdicionarAsync(horarioMedico);
-            return Ok("Horário cadastrado com sucesso.");
+                await _horarioRepository.AdicionarAsync(horarioMedico);
+                return Ok("Horário cadastrado com sucesso.");
+            }
+            catch (Exception Ex)
+            {
+                _logger.LogError(Ex, $"Erro no cadastro de Horario Medico, IdMedico: {horarioMedico.IdMedico}.");
+                return BadRequest($"Error: {Ex.Message}");
+            }   
         }
 
+        /// <summary>
+        /// Obtém a lista de todos os horários médicos cadastrados.
+        /// </summary>
+        /// <returns>Retorna uma lista de horários médicos.</returns>
         [HttpGet]
-        public async Task<IActionResult> GetHorarios() => Ok(await _horarioRepository.GetHorariosAsync());
+        public async Task<IActionResult> GetHorarios() 
+        {
+            try
+            {
+                _logger.LogInformation("Iniciando a busca de horários.");
+                return Ok(await _horarioRepository.GetHorariosAsync());
+            }
+            catch (Exception Ex)
+            {
+                _logger.LogError(Ex, "Erro na busca de horários.");
+                return BadRequest($"Error: {Ex.Message}");
+            }
+        }
+            
     }
 
 }
