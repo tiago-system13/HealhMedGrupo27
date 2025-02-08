@@ -31,11 +31,12 @@ namespace HealthMed.Grupo27.Infrastructure.Data
                     .AddJsonFile("appsettings.json")
                     .Build();
 
+                var srv = Environment.GetEnvironmentVariable("SRV_BD");
                 var usr = Environment.GetEnvironmentVariable("USR_BD");
                 var pwd = Environment.GetEnvironmentVariable("PWD_BD");
 
                 var connectionString = configuration.GetConnectionString("DefaultConnection");
-                connectionString = string.Format(connectionString, usr, pwd);
+                connectionString = string.Format(connectionString, srv, usr, pwd);
 
                 optionsBuilder.UseSqlServer(connectionString);
             }

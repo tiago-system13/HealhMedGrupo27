@@ -24,11 +24,12 @@ var configuration = new ConfigurationBuilder()
                     .AddJsonFile("appsettings.json")
                     .Build();
 
+var srv = Environment.GetEnvironmentVariable("SRV_BD");
 var usr = Environment.GetEnvironmentVariable("USR_BD");
 var pwd = Environment.GetEnvironmentVariable("PWD_BD");
 
 var connectionString = configuration.GetConnectionString("DefaultConnection");
-connectionString = string.Format(connectionString, usr, pwd);
+connectionString = string.Format(connectionString, srv, usr, pwd);
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
 
