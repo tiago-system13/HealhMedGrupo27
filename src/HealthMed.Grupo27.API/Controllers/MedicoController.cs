@@ -27,7 +27,7 @@ namespace HealthMed.Grupo27.API.Controllers
         /// <returns></returns>
         [HttpGet]
         [AuthorizeProfiles(UserProfile.Medico, UserProfile.Administrador, UserProfile.Paciente)]
-        public async Task<IActionResult> BuscarMedicos([FromQuery] string? especialidade, [FromQuery] string? nome, [FromQuery] string? crm, [FromQuery] decimal? valorConsulta)
+        public async Task<IActionResult> BuscarMedicos([FromQuery] string? especialidade, [FromQuery] string? nome, [FromQuery] string? crm, [FromQuery] decimal? valorConsultaInicial, [FromQuery] decimal? valorConsultaFinal)
         {
             try
             {
