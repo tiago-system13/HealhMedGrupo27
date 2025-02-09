@@ -25,7 +25,7 @@ namespace HealthMed.Grupo27.API.Controllers
         /// <param name="crm">CRM do médico (opcional).</param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> BuscarMedicos([FromQuery] string? especialidade, [FromQuery] string? nome, [FromQuery] string? crm, [FromQuery] decimal? valorConsulta)
+        public async Task<IActionResult> BuscarMedicos([FromQuery] string? especialidade, [FromQuery] string? nome, [FromQuery] string? crm, [FromQuery] decimal? valorConsultaInicial, [FromQuery] decimal? valorConsultaFinal)
         {
             try
             {
@@ -48,9 +48,14 @@ namespace HealthMed.Grupo27.API.Controllers
                     medicos = medicos.Where(m => m.CRM.Equals(crm, StringComparison.OrdinalIgnoreCase)).ToList();
                 }
 
-                if (valorConsulta.HasValue)
+                if (valorConsultaInicial.HasValue)
                 {
-                    medicos = medicos.Where(m => m.ValorConsulta == valorConsulta.Value).ToList();
+                    medicos = medicos.Where(m => m.ValorConsulta >= valorConsultaInicial.Value).ToList();
+                }
+
+                if (valorConsultaFinal.HasValue)
+                {
+                    medicos = medicos.Where(m => m.ValorConsulta <= valorConsultaFinal.Value).ToList();
                 }
 
                 return Ok(medicos);
