@@ -21,7 +21,7 @@ A ideia do projeto é construir uma API para atender as necessidades do negocio 
 
 Seguindo o seguinte diagrama Diagrama da arquitetura:
 
-![](./Assets/DesenhodaSoluçãoMVP.png)
+![](.Assets/DesenhodaSoluçãoMVP.png)
 
 ## Tecnologias e Frameworks 
 
@@ -62,7 +62,7 @@ A proteção dos dados sensíveis dos pacientes deve seguir as melhores prática
 
 Agora com o aplicativo em execução sera possivel visualisar a interface do Swagger onde estarão expostos todos os endpoints disponiveis da API, contendo todas as informações necessarias para começar a fazer as requisições.
 
-![](./Assets/NuGet.png)
+![](.Assets/NuGet.png)
 
 ## Conclusão
 
