@@ -17,19 +17,10 @@ var srv = Environment.GetEnvironmentVariable("SRV_BD");
 var usr = Environment.GetEnvironmentVariable("USR_BD");
 var pwd = Environment.GetEnvironmentVariable("PWD_BD");
 
-builder.Services.AddAuthentication()
-                .AddBearerToken(IdentityConstants.BearerScheme);
-
-builder.Services.AddAuthorizationBuilder();
-
 var connectionString = configuration.GetConnectionString("DefaultConnection");
 connectionString = string.Format(connectionString, srv, usr, pwd);
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
-
-builder.Services.AddIdentityCore<IdentityUser>()
-    .AddEntityFrameworkStores<AppDbContext>()
-    .AddApiEndpoints();
 
 //builder.Services.AddScoped<IAuthService, AuthService>();
 
@@ -77,7 +68,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "HealthMed API v1"));
 }
-app.MapIdentityApi<IdentityUser>();
+
 app.UseAuthentication();
 app.UseAuthorization();
 
