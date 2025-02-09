@@ -10,11 +10,7 @@ namespace HealthMed.Grupo27.Domain.DTOs
     {
         public int IdMedico { get; set; }
 
-        public int IdHorario { get; set; }
-
-        public int Status { get; set; }
-
-        public DateTime DiaSemana { get; set; }
+        public DayOfWeek DiaSemana { get; set; }
 
         public DateTime HoraInicio { get; set; }
 

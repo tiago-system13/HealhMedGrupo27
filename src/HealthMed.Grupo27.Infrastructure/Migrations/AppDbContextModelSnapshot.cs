@@ -65,8 +65,8 @@ namespace HealthMed.Grupo27.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdHorario"));
 
-                    b.Property<DateTime>("DiaSemana")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("DiaSemana")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("HoraFim")
                         .HasColumnType("datetime2");

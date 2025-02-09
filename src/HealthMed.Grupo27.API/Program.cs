@@ -6,7 +6,6 @@ using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Identity;
 using HealthMed.Grupo27.Domain.Interfaces;
 
-// Arquivo: Telemedicina.API/Program.cs
 var builder = WebApplication.CreateBuilder(args);
 
 var configuration = new ConfigurationBuilder()
@@ -33,6 +32,7 @@ builder.Services.AddIdentityCore<IdentityUser>()
     .AddApiEndpoints();
 
 //builder.Services.AddScoped<IAuthService, AuthService>();
+
 builder.Services.AddScoped<IMedicoRepository, MedicoRepository>();
 builder.Services.AddScoped<IPacienteRepository, PacienteRepository>();
 builder.Services.AddScoped<IConsultaRepository, ConsultaRepository>();
