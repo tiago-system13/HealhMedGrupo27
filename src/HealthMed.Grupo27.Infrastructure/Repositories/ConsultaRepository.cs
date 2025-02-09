@@ -23,7 +23,8 @@ namespace HealthMed.Grupo27.Infrastructure.Repositories
         {
             return await _context.Consultas.AnyAsync(c => c.IdMedico == idMedico &&
                                                           ((inicio >= c.HoraInicio && inicio < c.HoraFim) ||
-                                                          (fim > c.HoraInicio && fim <= c.HoraFim)));
+                                                          (fim > c.HoraInicio && fim <= c.HoraFim))
+                                                          && c.StatusConsulta != Domain.Enums.StatusConsultaType.Cancelada);
         }
 
         public async Task AdicionarAsync(Consulta consulta)
@@ -53,9 +54,9 @@ namespace HealthMed.Grupo27.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<Consulta> ObterPorIdAsync(int idConsulta)
+        public async Task<Consulta> ObterPorIdAsync(int idConsulta)
         {
-            throw new NotImplementedException();
+            return await _context.Consultas.FirstOrDefaultAsync(m => m.IdConsulta == idConsulta);
         }
 
         Task<Consulta> IConsultaRepository.GetConsultasAsync()
