@@ -50,9 +50,14 @@ namespace HealthMed.Grupo27.API.Controllers
                     medicos = medicos.Where(m => m.CRM.Equals(crm, StringComparison.OrdinalIgnoreCase)).ToList();
                 }
 
-                if (valorConsulta.HasValue)
+                if (valorConsultaInicial.HasValue)
                 {
-                    medicos = medicos.Where(m => m.ValorConsulta == valorConsulta.Value).ToList();
+                    medicos = medicos.Where(m => m.ValorConsulta >= valorConsultaInicial.Value).ToList();
+                }
+
+                if (valorConsultaFinal.HasValue)
+                {
+                    medicos = medicos.Where(m => m.ValorConsulta <= valorConsultaFinal.Value).ToList();
                 }
 
                 return Ok(medicos);
