@@ -38,7 +38,7 @@ namespace HealthMed.Grupo27.API.Controllers
                 return BadRequest("Não há horários disponíveis para o médico escolhido.");
             }
 
-            var horarioValido = horariosDisponiveis.Any(h => h.DiaSemana.DayOfWeek == consultaDTO.DiaConsulta.DayOfWeek &&
+            var horarioValido = horariosDisponiveis.Any(h => h.DiaSemana == consultaDTO.DiaConsulta.DayOfWeek &&
                                                               consultaDTO.HoraInicio.TimeOfDay >= h.HoraInicio.TimeOfDay &&
                                                               consultaDTO.HoraFim.TimeOfDay <= h.HoraFim.TimeOfDay);
             if (!horarioValido)

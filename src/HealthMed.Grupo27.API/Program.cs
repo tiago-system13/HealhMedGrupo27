@@ -16,7 +16,6 @@ using HealthMed.Grupo27.Infrastructure.Repositories;
 using HealthMed.Grupo27.API.Controllers;
 using Microsoft.OpenApi.Models;
 
-// Arquivo: Telemedicina.API/Program.cs
 var builder = WebApplication.CreateBuilder(args);
 
 var configuration = new ConfigurationBuilder()
@@ -34,6 +33,7 @@ connectionString = string.Format(connectionString, srv, usr, pwd);
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
 
 //builder.Services.AddScoped<IAuthService, AuthService>();
+
 builder.Services.AddScoped<IMedicoRepository, MedicoRepository>();
 builder.Services.AddScoped<IPacienteRepository, PacienteRepository>();
 builder.Services.AddScoped<IConsultaRepository, ConsultaRepository>();

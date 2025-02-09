@@ -1,4 +1,5 @@
 ﻿using HealthMed.Grupo27.Application.Interfaces;
+using HealthMed.Grupo27.Domain.DTOs;
 using HealthMed.Grupo27.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,13 +19,22 @@ namespace HealthMed.Grupo27.API.Controllers
         }
 
         [HttpPost("cadastrar")]
-        public async Task<IActionResult> CadastroHorarioMedico([FromBody] HorarioMedico horarioMedico)
+        public async Task<IActionResult> CadastroHorarioMedico([FromBody] HorarioMedicoDTO horarioMedicoDTO)
         {
-            var medicoExiste = await _medicoRepository.GetByIdAsync(horarioMedico.IdMedico);
+            var medicoExiste = await _medicoRepository.GetByIdAsync(horarioMedicoDTO.IdMedico);
             if (medicoExiste == null)
             {
                 return BadRequest("Médico não encontrado.");
             }
+
+            HorarioMedico horarioMedico = new HorarioMedico()
+            {
+                IdMedico = horarioMedicoDTO.IdMedico,
+                Status = 1,
+                DiaSemana = horarioMedicoDTO.DiaSemana,
+                HoraInicio = horarioMedicoDTO.HoraInicio,
+                HoraFim = horarioMedicoDTO.HoraFim
+            };
 
             await _horarioRepository.AdicionarAsync(horarioMedico);
             return Ok("Horário cadastrado com sucesso.");
