@@ -17,41 +17,70 @@ namespace HealthMed.Grupo27.API.Controllers
     {
         private readonly IUsuarioRepository _usuarioRepository;
         private readonly IConfiguration _configuration;
+        private readonly ILogger<ConsultaController> _logger;
 
-        public UsuarioController(IUsuarioRepository usuarioRepository, IConfiguration configuration)
+        public UsuarioController(IUsuarioRepository usuarioRepository, IConfiguration configuration, ILogger<ConsultaController> logger)
         {
             _usuarioRepository = usuarioRepository;
             _configuration = configuration;
+            _logger = logger;
         }
 
+        /// <summary>
+        /// Realiza o login de um médico no sistema.
+        /// </summary>
+        /// <param name="request">Objeto contendo as credenciais do médico.</param>
+        /// <returns></returns>
         [HttpPost("login-medico")]
         public async Task<IActionResult> LoginMedico([FromBody] LoginMedicoRequest request)
         {
-            var senhaCriptografada = HashSenha(request.Senha);
-            var usuario = await _usuarioRepository.ObterPorCrmESenhaAsync(request.CRM, senhaCriptografada);
-
-            if (usuario == null)
+            try
             {
-                return Unauthorized("Login falhou. Verifique suas credenciais.");
-            }
+                _logger.LogInformation($"Iniciando o login do medico CRM: {request.CRM}.");
+                var senhaCriptografada = HashSenha(request.Senha);
+                var usuario = await _usuarioRepository.ObterPorCrmESenhaAsync(request.CRM, senhaCriptografada);
 
-            var token = GerarToken(usuario);
-            return Ok(new { Token = token });
+                if (usuario == null)
+                {
+                    return Unauthorized("Login falhou. Verifique suas credenciais.");
+                }
+
+                var token = GerarToken(usuario);
+                return Ok(new { Token = token });
+            }
+            catch (Exception Ex)
+            {
+                _logger.LogError(Ex, $"Erro no login do medico CRM: {request.CRM}");
+                return BadRequest($"Error: {Ex.Message}");
+            }       
         }
 
+        /// <summary>
+        /// Realiza o login de um paciente no sistema.
+        /// </summary>
+        /// <param name="request">Objeto contendo as credenciais do paciente.</param>
         [HttpPost("login-paciente")]
         public async Task<IActionResult> LoginPaciente([FromBody] LoginPacienteRequest request)
         {
-            var senhaCriptografada = Utilidades.CriptografarSenha(request.Senha);
-            var usuario = await _usuarioRepository.ObterPorLoginSenhaAsync(request.Login, senhaCriptografada);
-
-            if (usuario == null)
+            try
             {
-                return Unauthorized("Login falhou. Verifique as credenciais.");
-            }
+                _logger.LogInformation($"Iniciando o login do paciente Login: {request.Login}.");
+                var senhaCriptografada = Utilidades.CriptografarSenha(request.Senha);
+                var usuario = await _usuarioRepository.ObterPorLoginSenhaAsync(request.Login, senhaCriptografada);
 
-            var token = GerarToken(usuario);
-            return Ok(new { Token = token });
+                if (usuario == null)
+                {
+                    return Unauthorized("Login falhou. Verifique as credenciais.");
+                }
+
+                var token = GerarToken(usuario);
+                return Ok(new { Token = token });
+            }
+            catch (Exception Ex)
+            {
+                _logger.LogError(Ex, $"Erro no login do paciente Login: {request.Login}");
+                return BadRequest($"Error: {Ex.Message}");
+            }          
         }
 
         private string HashSenha(string senha)

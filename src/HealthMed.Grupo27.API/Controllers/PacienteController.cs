@@ -1,5 +1,6 @@
 ﻿using HealthMed.Grupo27.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace HealthMed.Grupo27.API.Controllers
 {
@@ -8,9 +9,32 @@ namespace HealthMed.Grupo27.API.Controllers
     public class PacienteController : ControllerBase
     {
         private readonly IPacienteRepository _repository;
-        public PacienteController(IPacienteRepository repository) => _repository = repository;
+        private readonly ILogger<ConsultaController> _logger;
 
+        public PacienteController(IPacienteRepository repository, ILogger<ConsultaController> logger)
+        {
+            _repository = repository;
+            _logger = logger;
+        }
+
+        /// <summary>
+        /// Obtém a lista de pacientes cadastrados.
+        /// </summary>
+        /// <returns>Retorna uma lista de pacientes.</returns>
         [HttpGet]
-        public async Task<IActionResult> GetPacientes() => Ok(await _repository.GetPacientesAsync());
+        public async Task<IActionResult> GetPacientes()
+        {
+            try
+            {
+                _logger.LogInformation("Iniciando a busca de pacientes.");
+                return Ok(await _repository.GetPacientesAsync());
+            }
+            catch (Exception Ex)
+            {
+                _logger.LogError(Ex, "Erro ao buscar pacientes.");
+                return BadRequest($"Error: {Ex.Message}");
+            }
+            
+        }
     }
 }
