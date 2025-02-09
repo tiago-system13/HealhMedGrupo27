@@ -39,21 +39,6 @@ builder.Services.AddScoped<IConsultaRepository, ConsultaRepository>();
 builder.Services.AddScoped<IHorarioMedicoRepository, HorarioMedicoRepository>();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 
-
-
-//builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-//    .AddJwtBearer(options =>
-//    {
-//        options.TokenValidationParameters = new TokenValidationParameters
-//        {
-//            ValidateIssuer = false,
-//            ValidateAudience = false,
-//            ValidateLifetime = true,
-//            ValidateIssuerSigningKey = true,
-//            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your_secret_key"))
-//        };
-//    });
-
 builder.Services.AddAuthorization();
 
 builder.Services.AddControllers();
@@ -61,14 +46,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "HealthMed API", Version = "v1" });
-    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "HealthMed API", Version = "v1" });   
+    c.AddSecurityDefinition("Bearer", new ApiKeyScheme
     {
-        In = ParameterLocation.Header,
-        Description = "Insira o token JWT com o prefixo 'Bearer ' ",
+        Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
         Name = "Authorization",
-        Type = SecuritySchemeType.ApiKey
-    });
+        In = "header",
+        Type = "apiKey"
+    });    
     c.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
         {

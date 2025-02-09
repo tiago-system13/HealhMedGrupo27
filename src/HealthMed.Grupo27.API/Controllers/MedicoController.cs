@@ -1,4 +1,5 @@
-﻿using HealthMed.Grupo27.Domain.Interfaces;
+﻿using HealthMed.Grupo27.API.Security;
+using HealthMed.Grupo27.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -25,6 +26,7 @@ namespace HealthMed.Grupo27.API.Controllers
         /// <param name="crm">CRM do médico (opcional).</param>
         /// <returns></returns>
         [HttpGet]
+        [AuthorizeProfiles(UserProfile.Medico, UserProfile.Administrador, UserProfile.Paciente)]
         public async Task<IActionResult> BuscarMedicos([FromQuery] string? especialidade, [FromQuery] string? nome, [FromQuery] string? crm, [FromQuery] decimal? valorConsulta)
         {
             try

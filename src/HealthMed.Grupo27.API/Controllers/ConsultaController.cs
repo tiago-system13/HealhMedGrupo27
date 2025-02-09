@@ -1,10 +1,9 @@
-﻿using HealthMed.Grupo27.Application.Interfaces;
+﻿using HealthMed.Grupo27.API.Security;
 using HealthMed.Grupo27.Domain.DTOs;
 using HealthMed.Grupo27.Domain.Entities;
 using HealthMed.Grupo27.Domain.Enums;
 using HealthMed.Grupo27.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace HealthMed.Grupo27.API.Controllers
 {
@@ -32,6 +31,7 @@ namespace HealthMed.Grupo27.API.Controllers
         /// </summary>
         /// <returns>Retorna todas as consultas médicas cadastradas.</returns>
         [HttpGet]
+        [AuthorizeProfiles(UserProfile.Medico, UserProfile.Administrador, UserProfile.Paciente)]
         public async Task<IActionResult> GetConsultas() => Ok(await _consultaRepository.GetConsultasAsync());
 
         /// <summary>
@@ -40,6 +40,7 @@ namespace HealthMed.Grupo27.API.Controllers
         /// <param name="consultaDTO">Dados da consulta a ser cadastrada.</param>
         /// <returns></returns>
         [HttpPost("cadastrar")]
+        [AuthorizeProfiles(UserProfile.Medico, UserProfile.Administrador)]
         public async Task<IActionResult> CadastrarConsulta([FromBody] ConsultaDTO consultaDTO)
         {
             try
@@ -93,6 +94,7 @@ namespace HealthMed.Grupo27.API.Controllers
         /// <param name="status">Novo status da consulta ( Cadastrada = 0, Cancelada = 1, Confirmada = 2)</param>
         /// <returns></returns>
         [HttpPut("confirmar/{idConsulta}")]
+        [AuthorizeProfiles(UserProfile.Medico, UserProfile.Administrador)]
         public async Task<IActionResult> ConfirmarConsultaMedica(int idConsulta, [FromBody] StatusConsultaType status)
         {
             try

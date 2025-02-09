@@ -1,4 +1,6 @@
-﻿using HealthMed.Grupo27.Domain.Entities;
+﻿using HealthMed.Grupo27.API.Security;
+using HealthMed.Grupo27.Domain.DTOs;
+using HealthMed.Grupo27.Domain.Entities;
 using HealthMed.Grupo27.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,17 +8,23 @@ namespace HealthMed.Grupo27.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class HorarioMedicoController : ControllerBase
+    public class HorarioMedicoController : BaseController<ConsultaController>
     {
         private readonly IHorarioMedicoRepository _horarioRepository;
         private readonly IMedicoRepository _medicoRepository;
         private readonly ILogger<ConsultaController> _logger;
 
-        public HorarioMedicoController(IHorarioMedicoRepository horarioRepository, IMedicoRepository medicoRepository, ILogger<ConsultaController> logger)
+        public HorarioMedicoController
+        (
+            IHorarioMedicoRepository horarioRepository,
+            IMedicoRepository medicoRepository,
+            ILogger<ConsultaController> logger,
+            IHttpContextAccessor accessor
+        )
+        :base(accessor, logger)
         {
             _horarioRepository = horarioRepository;
-            _medicoRepository = medicoRepository;
-            _logger = logger;
+            _medicoRepository = medicoRepository;            
         }
 
         /// <summary>
@@ -25,6 +33,7 @@ namespace HealthMed.Grupo27.API.Controllers
         /// <param name="horarioMedico">Objeto contendo as informações do horário a ser cadastrado.</param>
         /// <returns></returns>
         [HttpPost("cadastrar")]
+        [AuthorizeProfiles(UserProfile.Medico,UserProfile.Administrador)]
         public async Task<IActionResult> CadastroHorarioMedico([FromBody] HorarioMedicoDTO horarioMedicoDTO)
         {
             try
@@ -60,6 +69,7 @@ namespace HealthMed.Grupo27.API.Controllers
         /// </summary>
         /// <returns>Retorna uma lista de horários médicos.</returns>
         [HttpGet]
+        [AuthorizeProfiles(UserProfile.Medico, UserProfile.Administrador)]
         public async Task<IActionResult> GetHorarios() 
         {
             try

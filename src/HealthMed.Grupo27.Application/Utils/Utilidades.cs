@@ -16,5 +16,11 @@ namespace HealthMed.Grupo27.Application.Utils
                 return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
             }
         }
+
+        public static string Redact(string text)
+        {
+            int count = string.IsNullOrEmpty(text) ? 0 : text.Count();
+            return $"**** [Redacted info {count} chars] ****";
+        }
     }
 }

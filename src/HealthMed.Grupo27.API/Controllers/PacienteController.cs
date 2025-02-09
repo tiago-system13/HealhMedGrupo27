@@ -1,4 +1,5 @@
-﻿using HealthMed.Grupo27.Domain.Interfaces;
+﻿using HealthMed.Grupo27.API.Security;
+using HealthMed.Grupo27.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -22,6 +23,7 @@ namespace HealthMed.Grupo27.API.Controllers
         /// </summary>
         /// <returns>Retorna uma lista de pacientes.</returns>
         [HttpGet]
+        [AuthorizeProfiles(UserProfile.Medico, UserProfile.Administrador, UserProfile.Paciente)]
         public async Task<IActionResult> GetPacientes()
         {
             try

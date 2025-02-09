@@ -1,8 +1,11 @@
-﻿using HealthMed.Grupo27.Application.Utils;
+﻿using HealthMed.Grupo27.API.Security;
+using HealthMed.Grupo27.Application.Utils;
+using HealthMed.Grupo27.Application.ViewModels;
 using HealthMed.Grupo27.Domain.DTOs;
 using HealthMed.Grupo27.Domain.Entities;
 using HealthMed.Grupo27.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -12,17 +15,17 @@ namespace HealthMed.Grupo27.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class UsuarioController : ControllerBase
+    public class UsuarioController : BaseController<UserTokenViewModel>
     {
         private readonly IUsuarioRepository _usuarioRepository;
         private readonly IConfiguration _configuration;
-        private readonly ILogger<ConsultaController> _logger;
+        private readonly ILogger<UserTokenViewModel> _logger;
 
-        public UsuarioController(IUsuarioRepository usuarioRepository, IConfiguration configuration, ILogger<ConsultaController> logger)
+        public UsuarioController(IUsuarioRepository usuarioRepository, IConfiguration configuration, IHttpContextAccessor accessor, ILogger<UserTokenViewModel> logger)
+            :base(accessor, logger)
         {
             _usuarioRepository = usuarioRepository;
-            _configuration = configuration;
-            _logger = logger;
+            _configuration = configuration;            
         }
 
         /// <summary>
@@ -80,6 +83,20 @@ namespace HealthMed.Grupo27.API.Controllers
                 _logger.LogError(Ex, $"Erro no login do paciente Login: {request.Login}");
                 return BadRequest($"Error: {Ex.Message}");
             }          
+        }
+
+        [HttpGet]
+        [AuthorizeProfiles(UserProfile.Medico, UserProfile.Administrador, UserProfile.Paciente)]
+        public ActionResult<UserTokenViewModel> Get()
+        {
+            _logger.LogInformation("Get User Token: UserController");
+            return new UserTokenViewModel
+            {
+                UserId = LoggedInUser.Name,
+                Profiles = UserProfiles,
+                Areas = UserAreas
+            };
+
         }
 
         private string HashSenha(string senha)
